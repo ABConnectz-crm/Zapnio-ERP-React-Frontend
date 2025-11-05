@@ -70,10 +70,10 @@ export default function LeadsPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative mb-6"
+        className="relative mb-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-4"
       >
-        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-lg" />
-        <div className="relative p-4 flex gap-4">
+        {/* Solid Card - No Glassmorphism */}
+        <div className="relative flex gap-4">
           {/* Search */}
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
@@ -82,7 +82,7 @@ export default function LeadsPage() {
               placeholder="Search leads by name, company, or email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-neutral-100/50 dark:bg-neutral-800/50 border border-neutral-200/50 dark:border-neutral-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function LeadsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2.5 bg-neutral-100/50 dark:bg-neutral-800/50 border border-neutral-200/50 dark:border-neutral-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
+            className="px-4 py-2.5 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
           >
             <option value="all">All Status</option>
             <option value="new">New</option>
@@ -107,30 +107,30 @@ export default function LeadsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="relative"
+        className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm overflow-hidden"
       >
-        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-lg" />
-        <div className="relative overflow-hidden rounded-2xl">
+        {/* Solid Card - No Glassmorphism */}
+        <div className="relative overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-neutral-200/50 dark:border-neutral-700/50">
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50/50 dark:bg-neutral-800/30">
+                <tr className="border-b border-neutral-200 dark:border-neutral-800">
+                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800">
                     Name
                   </th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50/50 dark:bg-neutral-800/30">
+                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800">
                     Company
                   </th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50/50 dark:bg-neutral-800/30">
+                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800">
                     Status
                   </th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50/50 dark:bg-neutral-800/30">
+                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800">
                     Value
                   </th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50/50 dark:bg-neutral-800/30">
+                  <th className="text-left py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800">
                     Assigned To
                   </th>
-                  <th className="text-right py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50/50 dark:bg-neutral-800/30">
+                  <th className="text-right py-4 px-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800">
                     Actions
                   </th>
                 </tr>
@@ -142,7 +142,7 @@ export default function LeadsPage() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + index * 0.05 }}
-                    className="border-b border-neutral-100/50 dark:border-neutral-800/50 hover:bg-neutral-50/30 dark:hover:bg-neutral-800/20 transition-colors"
+                    className="border-b border-neutral-100 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">

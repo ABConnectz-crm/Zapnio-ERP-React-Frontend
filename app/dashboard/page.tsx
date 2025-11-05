@@ -85,10 +85,9 @@ export default function DashboardPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -4, scale: 1.02 }}
-            className="group relative"
+            className="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm group-hover:shadow-md transition-shadow"
           >
-            {/* Glassmorphism Card */}
-            <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow" />
+            {/* Solid Card - No Glassmorphism */}
 
             {/* Content */}
             <div className="relative p-6">
@@ -110,7 +109,7 @@ export default function DashboardPage() {
                 {/* Icon */}
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`p-3 rounded-xl ${getColorClasses(stat.color)}`}
+                  className={`p-3 rounded-lg ${getColorClasses(stat.color)}`}
                 >
                   <stat.icon className="w-6 h-6" />
                 </motion.div>
@@ -142,10 +141,10 @@ export default function DashboardPage() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative"
+          className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-6"
         >
-          <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-lg" />
-          <div className="relative p-6">
+          {/* Solid Card - No Glassmorphism */}
+          <div className="relative">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100">
@@ -155,14 +154,14 @@ export default function DashboardPage() {
                   Last 12 months performance
                 </p>
               </div>
-              <select className="px-3 py-2 bg-neutral-100/50 dark:bg-neutral-800/50 border border-neutral-200/50 dark:border-neutral-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50">
+              <select className="px-3 py-2 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50">
                 <option>Last 12 Months</option>
                 <option>Last 6 Months</option>
                 <option>Last 3 Months</option>
               </select>
             </div>
-            <div className="h-64 bg-gradient-to-br from-neutral-50/50 to-primary-50/30 dark:from-neutral-800/30 dark:to-primary-900/10 rounded-xl flex items-center justify-center border border-neutral-200/30 dark:border-neutral-700/30">
-              <p className="text-neutral-400 dark:text-neutral-600">Chart Area</p>
+            <div className="h-64 bg-neutral-50 dark:bg-neutral-800 rounded-lg flex items-center justify-center border border-neutral-200 dark:border-neutral-700">
+              <p className="text-neutral-400 dark:text-neutral-500">Chart Area</p>
             </div>
           </div>
         </motion.div>
@@ -172,16 +171,14 @@ export default function DashboardPage() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
-          className="relative"
+          className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-6"
         >
-          <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-lg" />
-          <div className="relative p-6">
-            <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-6">
-              Lead Status Distribution
-            </h3>
-            <div className="h-64 bg-gradient-to-br from-neutral-50/50 to-accent-50/30 dark:from-neutral-800/30 dark:to-accent-900/10 rounded-xl flex items-center justify-center border border-neutral-200/30 dark:border-neutral-700/30">
-              <p className="text-neutral-400 dark:text-neutral-600">Donut Chart Area</p>
-            </div>
+          {/* Solid Card - No Glassmorphism */}
+          <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-6">
+            Lead Status Distribution
+          </h3>
+          <div className="h-64 bg-neutral-50 dark:bg-neutral-800 rounded-lg flex items-center justify-center border border-neutral-200 dark:border-neutral-700">
+            <p className="text-neutral-400 dark:text-neutral-500">Donut Chart Area</p>
           </div>
         </motion.div>
       </div>
@@ -191,10 +188,10 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="relative"
+        className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-6"
       >
-        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-lg" />
-        <div className="relative p-6">
+        {/* Solid Card - No Glassmorphism */}
+        <div className="relative">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100">
               Recent Activities
@@ -210,7 +207,7 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 + index * 0.05 }}
-                className="flex items-start gap-4 p-4 rounded-xl bg-neutral-50/50 dark:bg-neutral-800/30 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-colors"
+                className="flex items-start gap-4 p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
               >
                 <div className={`w-2 h-2 rounded-full mt-2 ${activity.type === 'success' ? 'bg-green-500' : 'bg-primary-500'}`} />
                 <div className="flex-1 min-w-0">
