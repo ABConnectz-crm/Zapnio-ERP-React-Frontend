@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { DashboardLayout } from '@/components/layout/DashboardLayout';
+import { ZapnioLayout } from '@/components/layout/ZapnioLayout';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -96,7 +96,7 @@ export default function PipelinePage() {
   const totalLeads = stages.reduce((sum, stage) => sum + stage.leads.length, 0);
 
   return (
-    <DashboardLayout>
+    <ZapnioLayout>
       {/* Page Header */}
       <div className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
@@ -272,6 +272,6 @@ export default function PipelinePage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </ZapnioLayout>
   );
 }

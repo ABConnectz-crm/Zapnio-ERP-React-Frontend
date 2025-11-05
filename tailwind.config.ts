@@ -10,39 +10,73 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brand Colors - Professional Blue & Purple Gradient
+        // Zapnio Brand Colors
         primary: {
-          50: '#f0f5ff',
-          100: '#e0ebff',
-          200: '#c7d9ff',
-          300: '#a3bdff',
-          400: '#7a99ff',
-          500: '#5b7aff',
-          600: '#4c5cf5',
-          700: '#3d47d8',
-          800: '#333bad',
-          900: '#2e3589',
-          950: '#1e2051',
+          50: '#e6f7fb',
+          100: '#b3e9f5',
+          200: '#80daf0',
+          300: '#4dcceb',
+          400: '#1abde5',
+          500: '#00B4D8', // Cyan Blue - Main brand
+          600: '#0090ad',
+          700: '#006c82',
+          800: '#004857',
+          900: '#00242c',
         },
-        secondary: {
-          50: '#faf5ff',
-          100: '#f3e8ff',
-          200: '#e9d5ff',
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7e22ce',
-          800: '#6b21a8',
-          900: '#581c87',
-          950: '#3b0764',
-        },
-        // Accent Colors
         accent: {
-          teal: '#14b8a6',
-          orange: '#f97316',
-          pink: '#ec4899',
-          emerald: '#10b981',
+          50: '#ffe5e5',
+          100: '#ffb3b3',
+          200: '#ff8080',
+          300: '#ff4d4d',
+          400: '#ff1a1a',
+          500: '#FF3B3B', // Electric Red - CTA/Alert
+          600: '#cc2f2f',
+          700: '#992323',
+          800: '#661717',
+          900: '#330c0c',
+        },
+        charcoal: {
+          500: '#3D3D3D', // Charcoal Gray
+          600: '#313131',
+          700: '#252525',
+          800: '#191919',
+          900: '#0d0d0d',
+        },
+        // Pastel Gradients
+        coral: {
+          50: '#fff5f6',
+          100: '#ffe6e9',
+          200: '#FFB3BA', // Soft Coral
+          300: '#ff8088',
+          400: '#ff4d57',
+        },
+        peach: {
+          50: '#fff7f9',
+          100: '#ffeff2',
+          200: '#FFCCD5', // Peach Blush
+          300: '#ffaab9',
+          400: '#ff889d',
+        },
+        lavender: {
+          50: '#f5fbff',
+          100: '#e6f5ff',
+          200: '#BAE1FF', // Lavender Sky
+          300: '#8fd0ff',
+          400: '#64bfff',
+        },
+        powder: {
+          50: '#f0f9fd',
+          100: '#d9f0fa',
+          200: '#A0D8F0', // Powder Blue
+          300: '#75c7e8',
+          400: '#4ab6e0',
+        },
+        sky: {
+          50: '#f2fafe',
+          100: '#ddf3fc',
+          200: '#B5E5F5', // Sky Mist
+          300: '#8ed9f0',
+          400: '#67cdeb',
         },
         // Semantic Colors
         success: {
@@ -89,9 +123,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Lexend', 'Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],

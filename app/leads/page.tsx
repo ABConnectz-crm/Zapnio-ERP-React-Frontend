@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { DashboardLayout } from '@/components/layout/DashboardLayout';
+import { ZapnioLayout } from '@/components/layout/ZapnioLayout';
 import { Button } from '@/components/ui/Button';
 import { Input, Select } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
@@ -63,7 +63,7 @@ export default function LeadsPage() {
   });
 
   return (
-    <DashboardLayout>
+    <ZapnioLayout>
       {/* Page Header */}
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -273,6 +273,6 @@ export default function LeadsPage() {
           </div>
         </div>
       </Card>
-    </DashboardLayout>
+    </ZapnioLayout>
   );
 }
