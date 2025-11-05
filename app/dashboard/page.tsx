@@ -48,7 +48,7 @@ export default function DashboardPage() {
           Good Afternoon, Dinesh Kumar
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 text-lg">
-          Here's what's happening with your business today.
+          Here&apos;s what&apos;s happening with your business today.
         </p>
       </motion.div>
 
