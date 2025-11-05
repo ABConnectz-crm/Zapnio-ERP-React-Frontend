@@ -1,0 +1,12 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow authentication pages
+User-agent: *
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+
+# Sitemap
+Sitemap: https://zapnio-erp.vercel.app/sitemap.xml

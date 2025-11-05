@@ -50,7 +50,7 @@ export default function DashboardPage() {
       {/* Page Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-neutral-900">Dashboard</h1>
-        <p className="text-neutral-600 mt-1">Welcome back! Here's what's happening with your sales today.</p>
+        <p className="text-neutral-600 mt-1">Welcome back! Here&apos;s what&apos;s happening with your sales today.</p>
       </div>
 
       {/* Stats Grid */}

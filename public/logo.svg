@@ -1,0 +1,22 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Z Icon -->
+  <rect x="0" y="0" width="40" height="40" rx="8" fill="url(#logoGradient)"/>
+  <path d="M12 14L20 26L28 14H24L20 20L16 14H12Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12 28L20 28L28 28" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Text -->
+  <text x="48" y="28" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="url(#textGradient)">
+    Zapnio
+  </text>
+
+  <defs>
+    <linearGradient id="logoGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5b7aff"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="textGradient" x1="48" y1="0" x2="120" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5b7aff"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+  </defs>
+</svg>

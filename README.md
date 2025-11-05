@@ -88,7 +88,85 @@ Create a `.env.local` file in the root directory:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
+
+See `.env.example` for all available environment variables.
+
+## 🚀 Deploy to Vercel
+
+### Quick Deploy
+
+The fastest way to deploy is using the Vercel Platform:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ABConnectz-crm/Zapnio-ERP-React-Frontend)
+
+### Manual Deployment
+
+1. **Install Vercel CLI** (if not already installed):
+```bash
+npm install -g vercel
+```
+
+2. **Login to Vercel**:
+```bash
+vercel login
+```
+
+3. **Deploy to Preview**:
+```bash
+vercel
+```
+
+4. **Deploy to Production**:
+```bash
+vercel --prod
+```
+
+### Configuration
+
+The project includes a `vercel.json` configuration file with optimized settings:
+- Framework: Next.js (auto-detected)
+- Build Command: `npm run build`
+- Output Directory: `.next`
+- Region: `iad1` (US East)
+
+### Environment Variables on Vercel
+
+Set these environment variables in your Vercel project settings:
+
+1. Go to your Vercel project → Settings → Environment Variables
+2. Add the following:
+
+```
+NEXT_PUBLIC_APP_NAME=Zapnio ERP
+NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
+NEXT_PUBLIC_API_URL=https://your-api-domain.com/api
+```
+
+### Custom Domain
+
+To add a custom domain:
+
+1. Go to your Vercel project → Settings → Domains
+2. Add your custom domain
+3. Update DNS records as instructed
+4. Update `NEXT_PUBLIC_APP_URL` environment variable
+
+### Preview Deployments
+
+Every push to a branch creates a preview deployment:
+- Branch URL: `your-project-git-branch-name.vercel.app`
+- Commit URL: `your-project-git-commit-hash.vercel.app`
+
+### Production Deployment
+
+Push to the main branch or run:
+```bash
+vercel --prod
+```
+
+Your app will be live at: `https://your-project.vercel.app`
 
 ## 🎯 Roadmap
 
