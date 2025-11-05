@@ -33,10 +33,9 @@ export function ContentTopBar({ title, tabs = [], actions = [] }: ContentTopBarP
 
   return (
     <div className="mb-6">
-      {/* Glassmorphism Card */}
-      <div className="relative rounded-2xl overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-700/50" />
+      {/* Solid Card - No Glassmorphism */}
+      <div className="relative rounded-lg overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm">
+        {/* Solid Background */}
 
         {/* Content */}
         <div className="relative p-6">
@@ -58,10 +57,10 @@ export function ContentTopBar({ title, tabs = [], actions = [] }: ContentTopBarP
                     whileTap={{ scale: 0.98 }}
                     onClick={action.onClick}
                     className={`
-                      flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm
+                      flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm
                       transition-all duration-300 shadow-sm
                       ${action.variant === 'primary'
-                        ? 'bg-primary-500 hover:bg-primary-600 text-white shadow-primary-500/30'
+                        ? 'bg-primary-500 hover:bg-primary-600 text-white'
                         : 'bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300'
                       }
                     `}
@@ -76,7 +75,7 @@ export function ContentTopBar({ title, tabs = [], actions = [] }: ContentTopBarP
 
           {/* Tabs */}
           {tabs.length > 0 && (
-            <div className="flex items-center gap-1 border-t border-neutral-200/50 dark:border-neutral-700/50 pt-4">
+            <div className="flex items-center gap-1 border-t border-neutral-200 dark:border-neutral-800 pt-4">
               {tabs.map((tab) => {
                 const active = isTabActive(tab.href);
                 return (
