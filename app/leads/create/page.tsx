@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ZapnioLayout } from '@/components/layout/ZapnioLayout';
+import { ModernLayout } from '@/components/layout/ModernLayout';
 import { Card, CardHeader, CardBody } from '@/components/ui/Card';
 import { Input, Textarea, Select } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -43,7 +43,7 @@ export default function CreateLeadPage() {
   };
 
   return (
-    <ZapnioLayout>
+    <ModernLayout>
       {/* Page Header */}
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-2">
@@ -301,6 +301,6 @@ export default function CreateLeadPage() {
           </div>
         </div>
       </form>
-    </ZapnioLayout>
+    </ModernLayout>
   );
 }
