@@ -11,12 +11,17 @@
     --foreground: 222.2 84% 4.9%;
   }
 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 0 0% 100%;
+  }
+
   * {
-    @apply border-neutral-200;
+    @apply border-neutral-200 dark:border-neutral-800;
   }
 
   body {
-    @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+    @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 font-sans antialiased transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -57,9 +62,21 @@
     @apply bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600;
   }
 
-  /* Glass Effect */
+  /* Glassmorphism Effects */
   .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+    @apply bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-white/20 dark:border-neutral-700/30 shadow-glass;
+  }
+
+  .glass-strong {
+    @apply bg-white/90 dark:bg-neutral-900/90 backdrop-blur-2xl border border-white/30 dark:border-neutral-700/50 shadow-glass-lg;
+  }
+
+  .glass-subtle {
+    @apply bg-white/50 dark:bg-neutral-900/50 backdrop-blur-lg border border-white/10 dark:border-neutral-700/20 shadow-soft;
+  }
+
+  .glass-card {
+    @apply glass rounded-xl p-6 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300;
   }
 
   /* Status Badges */
