@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MainIconSidebar } from './MainIconSidebar';
 import { SecondarySidebar } from './SecondarySidebar';
 import { GlobalTopBar } from './GlobalTopBar';
@@ -12,22 +12,32 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 interface ModernLayoutProps {
   children: React.ReactNode;
   thirdLevelNav?: React.ReactNode;
+  showThirdLevelNav?: boolean; // Control visibility
 }
 
 // Context for third-level navigation
 const ThirdLevelNavContext = createContext<{
   setThirdLevelNav: (nav: React.ReactNode) => void;
+  showNav: boolean;
+  setShowNav: (show: boolean) => void;
 }>({
   setThirdLevelNav: () => {},
+  showNav: false,
+  setShowNav: () => {},
 });
 
 export const useThirdLevelNav = () => useContext(ThirdLevelNavContext);
 
-export function ModernLayout({ children, thirdLevelNav }: ModernLayoutProps) {
+// Define which sections have third-level navigation
+const SECTIONS_WITH_NAV = ['dashboard', 'crm', 'sales', 'projects', 'marketing', 'reports'];
+
+export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true }: ModernLayoutProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState<string | null>('dashboard');
   const [dynamicThirdLevelNav, setDynamicThirdLevelNav] = useState<React.ReactNode>(null);
+  const [showNav, setShowNav] = useState(false);
+  const [prevSelectedMenu, setPrevSelectedMenu] = useState<string | null>(null);
 
   // Determine selected menu based on current path
   useEffect(() => {
@@ -45,6 +55,30 @@ export function ModernLayout({ children, thirdLevelNav }: ModernLayoutProps) {
       setSelectedMenu('reports');
     }
   }, [pathname]);
+
+  // Animate nav when menu selection changes
+  useEffect(() => {
+    const finalThirdLevelNav = dynamicThirdLevelNav || thirdLevelNav;
+    const shouldShowNav = selectedMenu
+      ? SECTIONS_WITH_NAV.includes(selectedMenu) && showThirdLevelNav && !!finalThirdLevelNav
+      : false;
+
+    if (selectedMenu !== prevSelectedMenu) {
+      // Hide nav briefly for smooth transition
+      setShowNav(false);
+
+      // Show nav after animation delay if the section should have nav
+      const timer = setTimeout(() => {
+        setShowNav(shouldShowNav);
+        setPrevSelectedMenu(selectedMenu);
+      }, 150);
+
+      return () => clearTimeout(timer);
+    } else {
+      // If staying on same section, just update visibility
+      setShowNav(shouldShowNav);
+    }
+  }, [selectedMenu, prevSelectedMenu, showThirdLevelNav, dynamicThirdLevelNav, thirdLevelNav]);
 
   const handleMenuSelect = (menuKey: string) => {
     if (selectedMenu === menuKey && sidebarOpen) {
@@ -65,7 +99,7 @@ export function ModernLayout({ children, thirdLevelNav }: ModernLayoutProps) {
   const finalThirdLevelNav = dynamicThirdLevelNav || thirdLevelNav;
 
   return (
-    <ThirdLevelNavContext.Provider value={{ setThirdLevelNav: setDynamicThirdLevelNav }}>
+    <ThirdLevelNavContext.Provider value={{ setThirdLevelNav: setDynamicThirdLevelNav, showNav, setShowNav }}>
       <div className="min-h-screen bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
         {/* Animated background pattern */}
         <div className="fixed inset-0 opacity-[0.04] dark:opacity-[0.03] pointer-events-none">
@@ -88,23 +122,38 @@ export function ModernLayout({ children, thirdLevelNav }: ModernLayoutProps) {
         {/* Global Top Bar */}
         <GlobalTopBar sidebarOpen={sidebarOpen} />
 
-        {/* Third Level Navigation Bar - Positioned below GlobalTopBar */}
-        {finalThirdLevelNav && (
-          <motion.div
-            animate={{ paddingLeft: `${leftPadding}px` }}
-            transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
-            className="fixed top-16 right-0 left-0 z-20 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm"
-          >
-            {finalThirdLevelNav}
-          </motion.div>
-        )}
+        {/* Third Level Navigation Bar - ANIMATED - Positioned below GlobalTopBar */}
+        <AnimatePresence mode="wait">
+          {showNav && finalThirdLevelNav && (
+            <motion.div
+              key={selectedMenu || 'default'}
+              initial={{ opacity: 0, y: -20, height: 0 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                height: 'auto',
+                paddingLeft: `${leftPadding}px`
+              }}
+              exit={{ opacity: 0, y: -20, height: 0 }}
+              transition={{
+                type: 'spring',
+                bounce: 0.15,
+                duration: 0.5,
+                paddingLeft: { type: 'spring', bounce: 0.1, duration: 0.5 }
+              }}
+              className="fixed top-16 right-0 left-0 z-20 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm overflow-hidden"
+            >
+              {finalThirdLevelNav}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Main Content Area */}
         <motion.main
           id="main-content"
           animate={{ paddingLeft: `${leftPadding}px` }}
           transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
-          className={`min-h-screen ${finalThirdLevelNav ? 'pt-32' : 'pt-16'}`}
+          className={`min-h-screen ${showNav && finalThirdLevelNav ? 'pt-32' : 'pt-16'}`}
           role="main"
         >
           <motion.div

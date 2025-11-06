@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { ModernLayout } from '@/components/layout/ModernLayout';
+import { ThirdLevelNav } from '@/components/layout/ThirdLevelNav';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { Plus, TrendingUp, DollarSign } from 'lucide-react';
 
 interface Lead {
   id: number;
@@ -96,7 +98,26 @@ export default function PipelinePage() {
   const totalLeads = stages.reduce((sum, stage) => sum + stage.leads.length, 0);
 
   return (
-    <ModernLayout>
+    <ModernLayout
+      thirdLevelNav={
+        <ThirdLevelNav
+          title="Sales"
+          tabs={[
+            { id: 'pipeline', name: 'Pipeline', href: '/pipeline' },
+            { id: 'forecasts', name: 'Forecasts', href: '/forecasts' },
+            { id: 'quotes', name: 'Quotes', href: '/quotes' },
+          ]}
+          actions={[
+            {
+              id: 'new-deal',
+              label: 'New Deal',
+              icon: <Plus className="w-4 h-4" />,
+              variant: 'primary',
+            },
+          ]}
+        />
+      }
+    >
       {/* Page Header */}
       <div className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
