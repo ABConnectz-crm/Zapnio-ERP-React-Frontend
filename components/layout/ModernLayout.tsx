@@ -9,24 +9,12 @@ import { GlobalTopBar } from './GlobalTopBar';
 import { QuickActions } from '@/components/ui/QuickActions';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ThirdLevelNav } from './ThirdLevelNav';
+import { SubMenuItem, findActiveSubmenuItem } from './navigationConfig';
 
 interface ModernLayoutProps {
   children: React.ReactNode;
   thirdLevelNav?: React.ReactNode;
   showThirdLevelNav?: boolean; // Control visibility
-}
-
-interface SubMenuItemConfig {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  href: string;
-  badge?: string;
-  hasThirdLevelNav?: boolean;
-  thirdLevelNavConfig?: {
-    title: string;
-    tabs: any[];
-  };
 }
 
 // Context for third-level navigation
@@ -48,7 +36,7 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
   const [selectedMenu, setSelectedMenu] = useState<string | null>('dashboard');
   const [dynamicThirdLevelNav, setDynamicThirdLevelNav] = useState<React.ReactNode>(null);
   const [showNav, setShowNav] = useState(false);
-  const [activeSubmenuItem, setActiveSubmenuItem] = useState<SubMenuItemConfig | null>(null);
+  const [activeSubmenuItem, setActiveSubmenuItem] = useState<SubMenuItem | null>(null);
 
   // Determine selected menu based on current path
   useEffect(() => {
@@ -67,17 +55,24 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
     }
   }, [pathname]);
 
+  // Auto-detect active submenu and show nav based on pathname
+  useEffect(() => {
+    const activeItem = findActiveSubmenuItem(pathname);
+    if (activeItem && activeItem.hasThirdLevelNav) {
+      setActiveSubmenuItem(activeItem);
+      setShowNav(true);
+    } else {
+      setActiveSubmenuItem(null);
+      setShowNav(false);
+    }
+  }, [pathname]);
+
   // Handle submenu item click - show third-level nav if item has it
-  const handleSubmenuClick = (item: SubMenuItemConfig) => {
+  const handleSubmenuClick = (item: SubMenuItem) => {
     if (item.hasThirdLevelNav && item.thirdLevelNavConfig) {
       setActiveSubmenuItem(item);
-      // Brief delay for smooth transition
-      setShowNav(false);
-      setTimeout(() => {
-        setShowNav(true);
-      }, 150);
+      setShowNav(true);
     } else {
-      // Hide nav if submenu item doesn't have third-level nav
       setShowNav(false);
       setActiveSubmenuItem(null);
     }
@@ -135,26 +130,27 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
         {/* Global Top Bar */}
         <GlobalTopBar sidebarOpen={sidebarOpen} />
 
-        {/* Third Level Navigation Bar - ANIMATED - Positioned below GlobalTopBar */}
+        {/* Third Level Navigation Bar - ANIMATED - Slides down from behind GlobalTopBar */}
         <AnimatePresence mode="wait">
           {showNav && finalThirdLevelNav && (
             <motion.div
               key={activeSubmenuItem?.id || 'default'}
-              initial={{ opacity: 0, y: -20, height: 0 }}
+              initial={{ opacity: 0, y: -64, scaleY: 0.5 }}
               animate={{
                 opacity: 1,
                 y: 0,
-                height: 'auto',
+                scaleY: 1,
                 paddingLeft: `${leftPadding}px`
               }}
-              exit={{ opacity: 0, y: -20, height: 0 }}
+              exit={{ opacity: 0, y: -64, scaleY: 0.5 }}
               transition={{
                 type: 'spring',
-                bounce: 0.15,
-                duration: 0.5,
+                bounce: 0.2,
+                duration: 0.6,
                 paddingLeft: { type: 'spring', bounce: 0.1, duration: 0.5 }
               }}
-              className="fixed top-16 right-0 left-0 z-20 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm overflow-visible"
+              style={{ transformOrigin: 'top' }}
+              className="fixed top-16 right-0 left-0 z-10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm overflow-visible"
             >
               {finalThirdLevelNav}
             </motion.div>
