@@ -57,9 +57,9 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
   }, [openSubmenu]);
 
   return (
-    <div className="h-16 px-6 flex items-center justify-between">
+    <div className="h-16 px-6 flex items-center justify-between overflow-visible">
       {/* Title and Tabs */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-6 overflow-visible">
         {title && (
           <h2 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
             {title}
@@ -68,7 +68,7 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
 
         {/* Tabs */}
         {tabs.length > 0 && (
-          <nav className="flex items-center gap-1" role="navigation" aria-label="Section navigation">
+          <nav className="flex items-center gap-1 overflow-visible" role="navigation" aria-label="Section navigation">
             {tabs.map((tab) => {
               const active = isTabActive(tab.href);
               const hasSubmenu = tab.submenu && tab.submenu.length > 0;
@@ -76,7 +76,7 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
               return (
                 <div
                   key={tab.id}
-                  className="relative"
+                  className="relative overflow-visible"
                   ref={(el) => { submenuRefs.current[tab.id] = el; }}
                 >
                   {hasSubmenu ? (
@@ -150,7 +150,7 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-neutral-900 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden z-50"
+                          className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-neutral-900 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden z-[100]"
                         >
                           <div className="py-2">
                             {tab.submenu!.map((item, index) => (
