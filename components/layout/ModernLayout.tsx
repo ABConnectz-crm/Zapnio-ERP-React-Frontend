@@ -8,11 +8,25 @@ import { SecondarySidebar } from './SecondarySidebar';
 import { GlobalTopBar } from './GlobalTopBar';
 import { QuickActions } from '@/components/ui/QuickActions';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { ThirdLevelNav } from './ThirdLevelNav';
 
 interface ModernLayoutProps {
   children: React.ReactNode;
   thirdLevelNav?: React.ReactNode;
   showThirdLevelNav?: boolean; // Control visibility
+}
+
+interface SubMenuItemConfig {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+  href: string;
+  badge?: string;
+  hasThirdLevelNav?: boolean;
+  thirdLevelNavConfig?: {
+    title: string;
+    tabs: any[];
+  };
 }
 
 // Context for third-level navigation
@@ -28,17 +42,13 @@ const ThirdLevelNavContext = createContext<{
 
 export const useThirdLevelNav = () => useContext(ThirdLevelNavContext);
 
-// Define which sections have third-level navigation
-// Only include sections where pages actually provide nav content
-const SECTIONS_WITH_NAV = ['dashboard', 'crm', 'sales'];
-
 export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true }: ModernLayoutProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState<string | null>('dashboard');
   const [dynamicThirdLevelNav, setDynamicThirdLevelNav] = useState<React.ReactNode>(null);
   const [showNav, setShowNav] = useState(false);
-  const [prevSelectedMenu, setPrevSelectedMenu] = useState<string | null>(null);
+  const [activeSubmenuItem, setActiveSubmenuItem] = useState<SubMenuItemConfig | null>(null);
 
   // Determine selected menu based on current path
   useEffect(() => {
@@ -57,29 +67,21 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
     }
   }, [pathname]);
 
-  // Animate nav when menu selection changes
-  useEffect(() => {
-    const finalThirdLevelNav = dynamicThirdLevelNav || thirdLevelNav;
-    const shouldShowNav = selectedMenu
-      ? SECTIONS_WITH_NAV.includes(selectedMenu) && showThirdLevelNav && !!finalThirdLevelNav
-      : false;
-
-    if (selectedMenu !== prevSelectedMenu) {
-      // Hide nav briefly for smooth transition
+  // Handle submenu item click - show third-level nav if item has it
+  const handleSubmenuClick = (item: SubMenuItemConfig) => {
+    if (item.hasThirdLevelNav && item.thirdLevelNavConfig) {
+      setActiveSubmenuItem(item);
+      // Brief delay for smooth transition
       setShowNav(false);
-
-      // Show nav after animation delay if the section should have nav
-      const timer = setTimeout(() => {
-        setShowNav(shouldShowNav);
-        setPrevSelectedMenu(selectedMenu);
+      setTimeout(() => {
+        setShowNav(true);
       }, 150);
-
-      return () => clearTimeout(timer);
     } else {
-      // If staying on same section, just update visibility
-      setShowNav(shouldShowNav);
+      // Hide nav if submenu item doesn't have third-level nav
+      setShowNav(false);
+      setActiveSubmenuItem(null);
     }
-  }, [selectedMenu, prevSelectedMenu, showThirdLevelNav, dynamicThirdLevelNav, thirdLevelNav]);
+  };
 
   const handleMenuSelect = (menuKey: string) => {
     if (selectedMenu === menuKey && sidebarOpen) {
@@ -97,7 +99,16 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
   };
 
   const leftPadding = sidebarOpen ? 304 : 64; // 64px icon + 240px secondary OR just 64px
-  const finalThirdLevelNav = dynamicThirdLevelNav || thirdLevelNav;
+
+  // Generate third-level nav from active submenu item config
+  const generatedThirdLevelNav = activeSubmenuItem?.thirdLevelNavConfig ? (
+    <ThirdLevelNav
+      title={activeSubmenuItem.thirdLevelNavConfig.title}
+      tabs={activeSubmenuItem.thirdLevelNavConfig.tabs}
+    />
+  ) : null;
+
+  const finalThirdLevelNav = dynamicThirdLevelNav || generatedThirdLevelNav || thirdLevelNav;
 
   return (
     <ThirdLevelNavContext.Provider value={{ setThirdLevelNav: setDynamicThirdLevelNav, showNav, setShowNav }}>
@@ -118,6 +129,7 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
           isOpen={sidebarOpen}
           onToggle={handleToggleSidebar}
           selectedMenu={selectedMenu}
+          onSubmenuClick={handleSubmenuClick}
         />
 
         {/* Global Top Bar */}
@@ -127,7 +139,7 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
         <AnimatePresence mode="wait">
           {showNav && finalThirdLevelNav && (
             <motion.div
-              key={selectedMenu || 'default'}
+              key={activeSubmenuItem?.id || 'default'}
               initial={{ opacity: 0, y: -20, height: 0 }}
               animate={{
                 opacity: 1,
