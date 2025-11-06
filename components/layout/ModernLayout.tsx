@@ -144,10 +144,9 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
               }}
               exit={{ opacity: 0, y: -64, scaleY: 0.5 }}
               transition={{
-                type: 'spring',
-                bounce: 0.2,
-                duration: 0.6,
-                paddingLeft: { type: 'spring', bounce: 0.1, duration: 0.5 }
+                duration: 0.5,
+                ease: [0.4, 0, 0.2, 1],
+                paddingLeft: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
               }}
               style={{ transformOrigin: 'top' }}
               className="fixed top-16 right-0 left-0 z-10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm overflow-visible"
@@ -161,7 +160,7 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
         <motion.main
           id="main-content"
           animate={{ paddingLeft: `${leftPadding}px` }}
-          transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           className={`min-h-screen ${showNav && finalThirdLevelNav ? 'pt-32' : 'pt-16'}`}
           role="main"
         >

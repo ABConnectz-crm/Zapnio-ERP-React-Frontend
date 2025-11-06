@@ -185,3 +185,13 @@ export function findActiveSubmenuItem(pathname: string): SubMenuItem | null {
   }
   return null;
 }
+
+// Helper function to get the first navbar tab href for a submenu item
+export function getFirstNavTabHref(item: SubMenuItem): string {
+  if (item.hasThirdLevelNav && item.thirdLevelNavConfig) {
+    const firstTab = item.thirdLevelNavConfig.tabs[0];
+    return firstTab?.href || item.href;
+  }
+  return item.href;
+}
+
