@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { ModernLayout } from '@/components/layout/ModernLayout';
-import { ContentTopBar } from '@/components/layout/ContentTopBar';
+import { ThirdLevelNav } from '@/components/layout/ThirdLevelNav';
 import { motion } from 'framer-motion';
-import { Users, TrendingUp, DollarSign, Target, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Users, TrendingUp, DollarSign, Target, ArrowUpRight, ArrowDownRight, Download, Filter, Plus } from 'lucide-react';
 
 export default function DashboardPage() {
   const stats = [
@@ -65,67 +65,88 @@ export default function DashboardPage() {
   };
 
   return (
-    <ModernLayout>
-      {/* Content Top Bar - Internal Navigation */}
-      <ContentTopBar
-        title="Dashboard"
-        tabs={[
-          { id: 'overview', name: 'Overview', href: '/dashboard' },
-          { id: 'analytics', name: 'Analytics', href: '/dashboard/analytics' },
-          { id: 'reports', name: 'Reports', href: '/dashboard/reports' },
-        ]}
-      />
-
+    <ModernLayout
+      thirdLevelNav={
+        <ThirdLevelNav
+          title="Dashboard"
+          tabs={[
+            { id: 'overview', name: 'Overview', href: '/dashboard' },
+            { id: 'analytics', name: 'Analytics', href: '/dashboard/analytics' },
+            { id: 'reports', name: 'Reports', href: '/dashboard/reports' },
+          ]}
+          actions={[
+            { id: 'export', label: 'Export', icon: <Download className="w-4 h-4" />, variant: 'secondary' },
+            { id: 'filter', label: 'Filter', icon: <Filter className="w-4 h-4" />, variant: 'secondary' },
+          ]}
+        />
+      }
+    >
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -4, scale: 1.02 }}
-            className="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm group-hover:shadow-md transition-shadow"
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              delay: index * 0.1,
+              duration: 0.5,
+              type: 'spring',
+              stiffness: 100,
+            }}
+            whileHover={{ y: -8, scale: 1.03 }}
+            className="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
           >
-            {/* Solid Card - No Glassmorphism */}
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-neutral-100/50 dark:to-neutral-800/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+            {/* Animated border gradient */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 opacity-20 blur-xl" />
+            </div>
 
             {/* Content */}
             <div className="relative p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-1">
+                  <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 mb-2 uppercase tracking-wide">
                     {stat.title}
                   </p>
-                  <h3 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                  <h3 className="text-4xl font-extrabold bg-gradient-to-br from-neutral-900 to-neutral-600 dark:from-neutral-100 dark:to-neutral-400 bg-clip-text text-transparent">
                     {stat.value}
                   </h3>
                   {stat.subtitle && (
-                    <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-1">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-2">
                       {stat.subtitle}
                     </p>
                   )}
                 </div>
 
-                {/* Icon */}
+                {/* Icon with gradient background */}
                 <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`p-3 rounded-lg ${getColorClasses(stat.color)}`}
+                  whileHover={{ scale: 1.15, rotate: 10 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  className={`p-3.5 rounded-xl ${getColorClasses(stat.color)} shadow-lg group-hover:shadow-xl transition-shadow`}
                 >
                   <stat.icon className="w-6 h-6" />
                 </motion.div>
               </div>
 
-              {/* Trend */}
-              <div className="flex items-center gap-1">
+              {/* Trend with gradient background */}
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-700">
                 {stat.trend === 'up' ? (
-                  <ArrowUpRight className="w-4 h-4 text-green-600" />
+                  <div className="p-1 rounded-md bg-green-100 dark:bg-green-900/30">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+                  </div>
                 ) : (
-                  <ArrowDownRight className="w-4 h-4 text-red-600" />
+                  <div className="p-1 rounded-md bg-red-100 dark:bg-red-900/30">
+                    <ArrowDownRight className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
+                  </div>
                 )}
-                <span className={`text-sm font-semibold ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+                <span className={`text-sm font-bold ${stat.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                   {stat.change}
                 </span>
-                <span className="text-xs text-neutral-500 dark:text-neutral-400 ml-1">
+                <span className="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
                   vs last month
                 </span>
               </div>
@@ -135,90 +156,114 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Lead Generation Chart */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-6"
+          initial={{ opacity: 0, x: -40, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.6, type: 'spring', stiffness: 80 }}
+          whileHover={{ y: -4 }}
+          className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
         >
-          {/* Solid Card - No Glassmorphism */}
+          {/* Decorative gradient */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary-500/10 to-accent-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
           <div className="relative">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100">
+                <h3 className="text-xl font-extrabold text-neutral-900 dark:text-neutral-100 mb-1">
                   Lead Generation Trends
                 </h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">
                   Last 12 months performance
                 </p>
               </div>
-              <select className="px-3 py-2 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50">
+              <select className="px-4 py-2 bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all hover:border-primary-300 dark:hover:border-primary-700">
                 <option>Last 12 Months</option>
                 <option>Last 6 Months</option>
                 <option>Last 3 Months</option>
               </select>
             </div>
-            <div className="h-64 bg-neutral-50 dark:bg-neutral-800 rounded-lg flex items-center justify-center border border-neutral-200 dark:border-neutral-700">
-              <p className="text-neutral-400 dark:text-neutral-500">Chart Area</p>
+            <div className="h-72 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-xl flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-neutral-700">
+              <div className="text-center">
+                <TrendingUp className="w-12 h-12 text-neutral-300 dark:text-neutral-600 mx-auto mb-2" />
+                <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">Chart visualization</p>
+              </div>
             </div>
           </div>
         </motion.div>
 
         {/* Lead Status Distribution */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-6"
+          initial={{ opacity: 0, x: 40, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.6, type: 'spring', stiffness: 80 }}
+          whileHover={{ y: -4 }}
+          className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
         >
-          {/* Solid Card - No Glassmorphism */}
-          <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-6">
-            Lead Status Distribution
-          </h3>
-          <div className="h-64 bg-neutral-50 dark:bg-neutral-800 rounded-lg flex items-center justify-center border border-neutral-200 dark:border-neutral-700">
-            <p className="text-neutral-400 dark:text-neutral-500">Donut Chart Area</p>
+          {/* Decorative gradient */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-accent-500/10 to-primary-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          <div className="relative">
+            <h3 className="text-xl font-extrabold text-neutral-900 dark:text-neutral-100 mb-6">
+              Lead Status Distribution
+            </h3>
+            <div className="h-72 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-xl flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-neutral-700">
+              <div className="text-center">
+                <Target className="w-12 h-12 text-neutral-300 dark:text-neutral-600 mx-auto mb-2" />
+                <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">Donut chart visualization</p>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
 
       {/* Recent Activities */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-6"
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: 0.7, duration: 0.6, type: 'spring', stiffness: 80 }}
+        whileHover={{ y: -4 }}
+        className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
       >
-        {/* Solid Card - No Glassmorphism */}
+        {/* Decorative gradient */}
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-br from-primary-500/10 via-accent-500/10 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
         <div className="relative">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100">
+            <h3 className="text-xl font-extrabold text-neutral-900 dark:text-neutral-100">
               Recent Activities
             </h3>
-            <button className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">
-              View All
-            </button>
+            <motion.button
+              whileHover={{ scale: 1.05, x: 2 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors px-3 py-1.5 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
+            >
+              View All →
+            </motion.button>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {recentActivities.map((activity, index) => (
               <motion.div
                 key={activity.id}
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + index * 0.05 }}
-                className="flex items-start gap-4 p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                transition={{ delay: 0.8 + index * 0.05, type: 'spring', stiffness: 100 }}
+                whileHover={{ x: 4, scale: 1.01 }}
+                className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-white to-neutral-50/50 dark:from-neutral-800 dark:to-neutral-700/50 hover:from-primary-50 hover:to-accent-50 dark:hover:from-primary-900/10 dark:hover:to-accent-900/10 border border-neutral-200 dark:border-neutral-700 hover:border-primary-200 dark:hover:border-primary-800 transition-all duration-200 cursor-pointer group/item"
               >
-                <div className={`w-2 h-2 rounded-full mt-2 ${activity.type === 'success' ? 'bg-green-500' : 'bg-primary-500'}`} />
+                <div className={`flex-shrink-0 w-2.5 h-2.5 rounded-full mt-2 shadow-lg ${activity.type === 'success' ? 'bg-gradient-to-br from-green-400 to-green-600' : 'bg-gradient-to-br from-primary-400 to-primary-600'}`}>
+                  <div className={`w-full h-full rounded-full animate-ping opacity-75 ${activity.type === 'success' ? 'bg-green-400' : 'bg-primary-400'}`} style={{ animationDuration: '3s' }} />
+                </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                  <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 group-hover/item:text-primary-700 dark:group-hover/item:text-primary-300 transition-colors">
                     {activity.title}
                   </p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
                     {activity.user}
                   </p>
                 </div>
-                <span className="text-xs text-neutral-500 dark:text-neutral-500">
+                <span className="text-xs text-neutral-500 dark:text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded-lg whitespace-nowrap">
                   {activity.time}
                 </span>
               </motion.div>
