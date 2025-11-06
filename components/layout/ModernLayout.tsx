@@ -29,7 +29,8 @@ const ThirdLevelNavContext = createContext<{
 export const useThirdLevelNav = () => useContext(ThirdLevelNavContext);
 
 // Define which sections have third-level navigation
-const SECTIONS_WITH_NAV = ['dashboard', 'crm', 'sales', 'projects', 'marketing', 'reports'];
+// Only include sections where pages actually provide nav content
+const SECTIONS_WITH_NAV = ['dashboard', 'crm', 'sales'];
 
 export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true }: ModernLayoutProps) {
   const pathname = usePathname();
@@ -141,7 +142,7 @@ export function ModernLayout({ children, thirdLevelNav, showThirdLevelNav = true
                 duration: 0.5,
                 paddingLeft: { type: 'spring', bounce: 0.1, duration: 0.5 }
               }}
-              className="fixed top-16 right-0 left-0 z-20 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm overflow-hidden"
+              className="fixed top-16 right-0 left-0 z-20 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm overflow-visible"
             >
               {finalThirdLevelNav}
             </motion.div>
