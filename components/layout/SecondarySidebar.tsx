@@ -8,7 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
-import { SubMenuItem, SUBMENU_CONFIG } from './navigationConfig';
+import { SubMenuItem, SUBMENU_CONFIG, getFirstNavTabHref } from './navigationConfig';
 
 interface SecondarySidebarProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
           initial={{ x: -240, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -240, opacity: 0 }}
-          transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           className="fixed top-0 left-16 h-screen w-60 z-40 bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 shadow-sm"
         >
           {/* Solid Background - No Glassmorphism */}
@@ -64,16 +64,18 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: index * 0.05, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                   >
                     {item.hasThirdLevelNav ? (
-                      // Button for items with third-level nav
+                      // Button for items with third-level nav - navigates to first tab
                       <button
                         onClick={() => {
                           if (onSubmenuClick) {
                             onSubmenuClick(item);
                           }
-                          router.push(item.href);
+                          // Navigate to the first navbar tab automatically
+                          const firstTabHref = getFirstNavTabHref(item);
+                          router.push(firstTabHref);
                         }}
                         className={`
                           w-full group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
@@ -86,7 +88,7 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                       >
                         <motion.div
                           whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ type: 'spring', stiffness: 400 }}
+                          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                         >
                           {item.icon}
                         </motion.div>
@@ -127,7 +129,7 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                       >
                         <motion.div
                           whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ type: 'spring', stiffness: 400 }}
+                          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                         >
                           {item.icon}
                         </motion.div>
