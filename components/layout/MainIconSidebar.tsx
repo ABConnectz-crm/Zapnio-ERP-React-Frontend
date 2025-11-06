@@ -101,6 +101,7 @@ export function MainIconSidebar({ onMenuSelect, selectedMenu }: MainIconSidebarP
       <motion.aside
         initial={{ x: -64 }}
         animate={{ x: 0 }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         className="fixed top-0 left-0 h-screen w-16 z-50 flex flex-col bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800"
       >
         {/* Solid Background - No Glassmorphism */}
@@ -112,6 +113,7 @@ export function MainIconSidebar({ onMenuSelect, selectedMenu }: MainIconSidebarP
             <motion.div
               whileHover={{ scale: 1.05, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
               className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-sm"
             >
               <span className="text-white font-bold text-xl">Z</span>
@@ -129,6 +131,7 @@ export function MainIconSidebar({ onMenuSelect, selectedMenu }: MainIconSidebarP
                       onClick={() => item.subMenuKey && onMenuSelect(item.subMenuKey)}
                       whileHover={{ scale: 1.05, x: 2 }}
                       whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                       className={`
                         relative w-12 h-12 rounded-lg flex items-center justify-center
                         transition-all duration-300 group
@@ -145,7 +148,7 @@ export function MainIconSidebar({ onMenuSelect, selectedMenu }: MainIconSidebarP
                         <motion.div
                           layoutId="activeIndicator"
                           className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-accent-500 rounded-r-full"
-                          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                         />
                       )}
                     </motion.button>
@@ -173,6 +176,7 @@ export function MainIconSidebar({ onMenuSelect, selectedMenu }: MainIconSidebarP
                   <motion.button
                     whileHover={{ scale: 1.05, x: 2 }}
                     whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                     className="w-12 h-12 rounded-lg flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all duration-300"
                   >
                     {item.icon}

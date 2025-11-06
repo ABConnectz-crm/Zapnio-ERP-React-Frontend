@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,9 +20,14 @@ interface SecondarySidebarProps {
 export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClick }: SecondarySidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const prevMenuRef = useRef<string | null>(null);
 
   const subMenus = SUBMENU_CONFIG;
   const currentSubMenu = selectedMenu ? subMenus[selectedMenu] || [] : [];
+
+  // Track if menu changed (not just navigation within same menu)
+  const menuChanged = prevMenuRef.current !== selectedMenu;
+  prevMenuRef.current = selectedMenu;
 
   const isActive = (href: string) => pathname === href;
 
@@ -49,6 +54,7 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                 onClick={onToggle}
                 whileHover={{ scale: 1.1, rotate: 180 }}
                 whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 className="p-1.5 rounded-md bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-400 transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -57,14 +63,12 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
 
             {/* Sub Menu Items */}
             <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-              <AnimatePresence mode="popLayout">
                 {currentSubMenu.map((item, index) => (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={menuChanged ? { opacity: 0, x: -20 } : false}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ delay: index * 0.05, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ delay: menuChanged ? index * 0.05 : 0, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                   >
                     {item.hasThirdLevelNav ? (
                       // Button for items with third-level nav - navigates to first tab
@@ -97,6 +101,7 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                           <motion.span
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
+                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                             className={`
                               px-2 py-0.5 text-xs font-semibold rounded-full
                               ${isActive(item.href)
@@ -138,6 +143,7 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                           <motion.span
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
+                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                             className={`
                               px-2 py-0.5 text-xs font-semibold rounded-full
                               ${isActive(item.href)
@@ -153,7 +159,6 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                     )}
                   </motion.div>
                 ))}
-              </AnimatePresence>
             </nav>
           </div>
         </motion.aside>

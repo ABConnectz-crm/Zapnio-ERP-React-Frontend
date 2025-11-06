@@ -79,7 +79,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
 
       <motion.header
         animate={{ paddingLeft: `${leftOffset}px` }}
-        transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         className="fixed top-0 right-0 left-0 h-16 z-30 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm"
         role="banner"
       >
@@ -117,6 +117,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 className="p-2.5 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-700 hover:from-primary-100 hover:to-accent-100 dark:hover:from-primary-900/30 dark:hover:to-accent-900/30 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
                 aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -130,6 +131,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
               onClick={toggleFullscreen}
               className="p-2.5 rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-700 hover:from-primary-100 hover:to-accent-100 dark:hover:from-primary-900/30 dark:hover:to-accent-900/30 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
               aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
@@ -142,6 +144,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
               onClick={() => setSettingsOpen(true)}
               className="p-2.5 rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-700 hover:from-primary-100 hover:to-accent-100 dark:hover:from-primary-900/30 dark:hover:to-accent-900/30 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
               aria-label="Open settings"
@@ -156,6 +159,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
                 ref={notificationButtonRef}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 className="relative p-2.5 rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-700 hover:from-primary-100 hover:to-accent-100 dark:hover:from-primary-900/30 dark:hover:to-accent-900/30 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
                 aria-label="Notifications"
@@ -167,6 +171,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                   className="absolute top-1.5 right-1.5 w-2 h-2 bg-accent-500 rounded-full ring-2 ring-white dark:ring-neutral-900"
                 />
               </motion.button>
@@ -186,6 +191,7 @@ export function GlobalTopBar({ sidebarOpen }: GlobalTopBarProps) {
                 ref={profileButtonRef}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                 onClick={() => setProfileOpen(!profileOpen)}
                 className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-700 hover:from-primary-100 hover:to-accent-100 dark:hover:from-primary-900/30 dark:hover:to-accent-900/30 transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
                 aria-label="User profile menu"
