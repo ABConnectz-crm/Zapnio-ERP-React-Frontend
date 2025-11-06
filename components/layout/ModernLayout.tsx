@@ -66,9 +66,9 @@ export function ModernLayout({ children, thirdLevelNav }: ModernLayoutProps) {
 
   return (
     <ThirdLevelNavContext.Provider value={{ setThirdLevelNav: setDynamicThirdLevelNav }}>
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100/50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950/50">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
         {/* Animated background pattern */}
-        <div className="fixed inset-0 opacity-[0.03] dark:opacity-[0.02] pointer-events-none">
+        <div className="fixed inset-0 opacity-[0.04] dark:opacity-[0.03] pointer-events-none">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
             backgroundSize: '40px 40px'

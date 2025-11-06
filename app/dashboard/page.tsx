@@ -70,9 +70,31 @@ export default function DashboardPage() {
         <ThirdLevelNav
           title="Dashboard"
           tabs={[
-            { id: 'overview', name: 'Overview', href: '/dashboard' },
-            { id: 'analytics', name: 'Analytics', href: '/dashboard/analytics' },
-            { id: 'reports', name: 'Reports', href: '/dashboard/reports' },
+            {
+              id: 'overview',
+              name: 'Overview',
+              href: '/dashboard',
+            },
+            {
+              id: 'analytics',
+              name: 'Analytics',
+              href: '/dashboard/analytics',
+              submenu: [
+                { id: 'performance', name: 'Performance', href: '/dashboard/analytics/performance', description: 'View performance metrics' },
+                { id: 'conversion', name: 'Conversion', href: '/dashboard/analytics/conversion', description: 'Track conversion rates' },
+                { id: 'revenue', name: 'Revenue', href: '/dashboard/analytics/revenue', description: 'Revenue analytics' },
+              ]
+            },
+            {
+              id: 'reports',
+              name: 'Reports',
+              href: '/dashboard/reports',
+              submenu: [
+                { id: 'sales', name: 'Sales Report', href: '/dashboard/reports/sales', description: 'Detailed sales data' },
+                { id: 'leads', name: 'Leads Report', href: '/dashboard/reports/leads', description: 'Lead generation stats' },
+                { id: 'custom', name: 'Custom Report', href: '/dashboard/reports/custom', description: 'Build custom reports' },
+              ]
+            },
           ]}
           actions={[
             { id: 'export', label: 'Export', icon: <Download className="w-4 h-4" />, variant: 'secondary' },
