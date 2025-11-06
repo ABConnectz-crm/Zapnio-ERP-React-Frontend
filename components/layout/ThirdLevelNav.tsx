@@ -6,21 +6,21 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, ChevronDown } from 'lucide-react';
 
-interface SubMenuItem {
+export interface SubMenuItem {
   id: string;
   name: string;
   href: string;
   description?: string;
 }
 
-interface TabItem {
+export interface TabItem {
   id: string;
   name: string;
   href: string;
   submenu?: SubMenuItem[];
 }
 
-interface ActionButton {
+export interface ActionButton {
   id: string;
   label: string;
   icon?: React.ReactNode;

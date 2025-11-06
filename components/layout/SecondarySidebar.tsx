@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronLeft,
+  ChevronRight,
   Users,
   UserPlus,
   Building2,
@@ -24,6 +25,12 @@ import {
   PieChart,
   LayoutDashboard,
 } from 'lucide-react';
+import { TabItem } from './ThirdLevelNav';
+
+interface ThirdLevelNavConfig {
+  title: string;
+  tabs: TabItem[];
+}
 
 interface SubMenuItem {
   id: string;
@@ -31,31 +38,82 @@ interface SubMenuItem {
   icon: React.ReactNode;
   href: string;
   badge?: string;
+  hasThirdLevelNav?: boolean;
+  thirdLevelNavConfig?: ThirdLevelNavConfig;
 }
 
 interface SecondarySidebarProps {
   isOpen: boolean;
   onToggle: () => void;
   selectedMenu: string | null;
+  onSubmenuClick?: (item: SubMenuItem) => void;
 }
 
-export function SecondarySidebar({ isOpen, onToggle, selectedMenu }: SecondarySidebarProps) {
+export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClick }: SecondarySidebarProps) {
   const pathname = usePathname();
 
   const subMenus: Record<string, SubMenuItem[]> = {
     dashboard: [
-      { id: 'overview', name: 'Overview', icon: <LayoutDashboard className="w-5 h-5" />, href: '/dashboard' },
-      { id: 'analytics', name: 'Analytics', icon: <BarChart3 className="w-5 h-5" />, href: '/dashboard/analytics' },
+      {
+        id: 'overview',
+        name: 'Overview',
+        icon: <LayoutDashboard className="w-5 h-5" />,
+        href: '/dashboard',
+      },
+      {
+        id: 'analytics',
+        name: 'Analytics',
+        icon: <BarChart3 className="w-5 h-5" />,
+        href: '/dashboard/analytics',
+        hasThirdLevelNav: true,
+        thirdLevelNavConfig: {
+          title: 'Analytics',
+          tabs: [
+            { id: 'performance', name: 'Performance', href: '/dashboard/analytics/performance' },
+            { id: 'conversion', name: 'Conversion', href: '/dashboard/analytics/conversion' },
+            { id: 'revenue', name: 'Revenue', href: '/dashboard/analytics/revenue' },
+          ]
+        }
+      },
     ],
     crm: [
-      { id: 'leads', name: 'Leads', icon: <Users className="w-5 h-5" />, href: '/leads', badge: '72' },
+      {
+        id: 'leads',
+        name: 'Leads',
+        icon: <Users className="w-5 h-5" />,
+        href: '/leads',
+        badge: '72',
+        hasThirdLevelNav: true,
+        thirdLevelNavConfig: {
+          title: 'Leads',
+          tabs: [
+            { id: 'all', name: 'All Leads', href: '/leads' },
+            { id: 'my-leads', name: 'My Leads', href: '/leads/my-leads' },
+            { id: 'unassigned', name: 'Unassigned', href: '/leads/unassigned' },
+          ]
+        }
+      },
       { id: 'contacts', name: 'Contacts', icon: <UserPlus className="w-5 h-5" />, href: '/contacts' },
       { id: 'accounts', name: 'Accounts', icon: <Building2 className="w-5 h-5" />, href: '/accounts' },
       { id: 'deals', name: 'Deals', icon: <DollarSign className="w-5 h-5" />, href: '/deals' },
       { id: 'activities', name: 'Activities', icon: <Phone className="w-5 h-5" />, href: '/activities' },
     ],
     sales: [
-      { id: 'pipeline', name: 'Pipeline', icon: <TrendingUp className="w-5 h-5" />, href: '/pipeline' },
+      {
+        id: 'pipeline',
+        name: 'Pipeline',
+        icon: <TrendingUp className="w-5 h-5" />,
+        href: '/pipeline',
+        hasThirdLevelNav: true,
+        thirdLevelNavConfig: {
+          title: 'Sales',
+          tabs: [
+            { id: 'pipeline', name: 'Pipeline', href: '/pipeline' },
+            { id: 'forecasts', name: 'Forecasts', href: '/forecasts' },
+            { id: 'quotes', name: 'Quotes', href: '/quotes' },
+          ]
+        }
+      },
       { id: 'forecasts', name: 'Forecasts', icon: <BarChart3 className="w-5 h-5" />, href: '/forecasts' },
       { id: 'quotes', name: 'Quotes', icon: <FileText className="w-5 h-5" />, href: '/quotes' },
       { id: 'orders', name: 'Orders', icon: <DollarSign className="w-5 h-5" />, href: '/orders' },
@@ -124,6 +182,11 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu }: SecondarySi
                   >
                     <Link
                       href={item.href}
+                      onClick={(e) => {
+                        if (item.hasThirdLevelNav && onSubmenuClick) {
+                          onSubmenuClick(item);
+                        }
+                      }}
                       className={`
                         group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
                         transition-all duration-300
@@ -154,6 +217,13 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu }: SecondarySi
                         >
                           {item.badge}
                         </motion.span>
+                      )}
+                      {item.hasThirdLevelNav && (
+                        <ChevronRight
+                          className={`w-4 h-4 transition-transform ${
+                            isActive(item.href) ? 'text-white' : 'text-neutral-400'
+                          }`}
+                        />
                       )}
                     </Link>
                   </motion.div>
