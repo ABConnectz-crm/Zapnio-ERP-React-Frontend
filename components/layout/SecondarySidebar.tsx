@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronLeft,
@@ -51,6 +51,7 @@ interface SecondarySidebarProps {
 
 export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClick }: SecondarySidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const subMenus: Record<string, SubMenuItem[]> = {
     dashboard: [
@@ -67,11 +68,33 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
         href: '/dashboard/analytics',
         hasThirdLevelNav: true,
         thirdLevelNavConfig: {
-          title: 'Analytics',
+          title: 'Dashboard',
           tabs: [
-            { id: 'performance', name: 'Performance', href: '/dashboard/analytics/performance' },
-            { id: 'conversion', name: 'Conversion', href: '/dashboard/analytics/conversion' },
-            { id: 'revenue', name: 'Revenue', href: '/dashboard/analytics/revenue' },
+            {
+              id: 'overview',
+              name: 'Overview',
+              href: '/dashboard'
+            },
+            {
+              id: 'analytics',
+              name: 'Analytics',
+              href: '/dashboard/analytics',
+              submenu: [
+                { id: 'performance', name: 'Performance', href: '/dashboard/analytics/performance', description: 'View performance metrics' },
+                { id: 'conversion', name: 'Conversion', href: '/dashboard/analytics/conversion', description: 'Track conversion rates' },
+                { id: 'revenue', name: 'Revenue', href: '/dashboard/analytics/revenue', description: 'Revenue analytics' },
+              ]
+            },
+            {
+              id: 'reports',
+              name: 'Reports',
+              href: '/dashboard/reports',
+              submenu: [
+                { id: 'sales-reports', name: 'Sales Reports', href: '/dashboard/reports/sales', description: 'Detailed sales reports' },
+                { id: 'lead-reports', name: 'Lead Reports', href: '/dashboard/reports/leads', description: 'Lead generation reports' },
+                { id: 'custom-reports', name: 'Custom Reports', href: '/dashboard/reports/custom', description: 'Build custom reports' },
+              ]
+            },
           ]
         }
       },
@@ -85,11 +108,28 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
         badge: '72',
         hasThirdLevelNav: true,
         thirdLevelNavConfig: {
-          title: 'Leads',
+          title: 'CRM',
           tabs: [
-            { id: 'all', name: 'All Leads', href: '/leads' },
-            { id: 'my-leads', name: 'My Leads', href: '/leads/my-leads' },
-            { id: 'unassigned', name: 'Unassigned', href: '/leads/unassigned' },
+            {
+              id: 'leads',
+              name: 'Leads',
+              href: '/leads',
+              submenu: [
+                { id: 'all', name: 'All Leads', href: '/leads', description: 'View all leads' },
+                { id: 'my-leads', name: 'My Leads', href: '/leads/my-leads', description: 'Your assigned leads' },
+                { id: 'unassigned', name: 'Unassigned', href: '/leads/unassigned', description: 'Unassigned leads' },
+              ]
+            },
+            {
+              id: 'contacts',
+              name: 'Contacts',
+              href: '/contacts'
+            },
+            {
+              id: 'accounts',
+              name: 'Accounts',
+              href: '/accounts'
+            },
           ]
         }
       },
@@ -108,9 +148,26 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
         thirdLevelNavConfig: {
           title: 'Sales',
           tabs: [
-            { id: 'pipeline', name: 'Pipeline', href: '/pipeline' },
-            { id: 'forecasts', name: 'Forecasts', href: '/forecasts' },
-            { id: 'quotes', name: 'Quotes', href: '/quotes' },
+            {
+              id: 'pipeline',
+              name: 'Pipeline',
+              href: '/pipeline',
+              submenu: [
+                { id: 'all-deals', name: 'All Deals', href: '/pipeline', description: 'View all pipeline deals' },
+                { id: 'my-deals', name: 'My Deals', href: '/pipeline/my-deals', description: 'Your deals' },
+                { id: 'won', name: 'Won', href: '/pipeline/won', description: 'Closed won deals' },
+              ]
+            },
+            {
+              id: 'forecasts',
+              name: 'Forecasts',
+              href: '/forecasts'
+            },
+            {
+              id: 'quotes',
+              name: 'Quotes',
+              href: '/quotes'
+            },
           ]
         }
       },
@@ -180,52 +237,89 @@ export function SecondarySidebar({ isOpen, onToggle, selectedMenu, onSubmenuClic
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ delay: index * 0.05 }}
                   >
-                    <Link
-                      href={item.href}
-                      onClick={(e) => {
-                        if (item.hasThirdLevelNav && onSubmenuClick) {
-                          onSubmenuClick(item);
-                        }
-                      }}
-                      className={`
-                        group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
-                        transition-all duration-300
-                        ${isActive(item.href)
-                          ? 'bg-primary-500 text-white shadow-sm'
-                          : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-primary-600 dark:hover:text-primary-400'
-                        }
-                      `}
-                    >
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ type: 'spring', stiffness: 400 }}
+                    {item.hasThirdLevelNav ? (
+                      // Button for items with third-level nav
+                      <button
+                        onClick={() => {
+                          if (onSubmenuClick) {
+                            onSubmenuClick(item);
+                          }
+                          router.push(item.href);
+                        }}
+                        className={`
+                          w-full group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
+                          transition-all duration-300
+                          ${isActive(item.href)
+                            ? 'bg-primary-500 text-white shadow-sm'
+                            : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-primary-600 dark:hover:text-primary-400'
+                          }
+                        `}
                       >
-                        {item.icon}
-                      </motion.div>
-                      <span className="flex-1 font-medium text-sm">{item.name}</span>
-                      {item.badge && (
-                        <motion.span
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className={`
-                            px-2 py-0.5 text-xs font-semibold rounded-full
-                            ${isActive(item.href)
-                              ? 'bg-white/20 text-white'
-                              : 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400'
-                            }
-                          `}
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: 'spring', stiffness: 400 }}
                         >
-                          {item.badge}
-                        </motion.span>
-                      )}
-                      {item.hasThirdLevelNav && (
+                          {item.icon}
+                        </motion.div>
+                        <span className="flex-1 font-medium text-sm text-left">{item.name}</span>
+                        {item.badge && (
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className={`
+                              px-2 py-0.5 text-xs font-semibold rounded-full
+                              ${isActive(item.href)
+                                ? 'bg-white/20 text-white'
+                                : 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400'
+                              }
+                            `}
+                          >
+                            {item.badge}
+                          </motion.span>
+                        )}
                         <ChevronRight
                           className={`w-4 h-4 transition-transform ${
                             isActive(item.href) ? 'text-white' : 'text-neutral-400'
                           }`}
                         />
-                      )}
-                    </Link>
+                      </button>
+                    ) : (
+                      // Link for regular items without third-level nav
+                      <Link
+                        href={item.href}
+                        className={`
+                          group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
+                          transition-all duration-300
+                          ${isActive(item.href)
+                            ? 'bg-primary-500 text-white shadow-sm'
+                            : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-primary-600 dark:hover:text-primary-400'
+                          }
+                        `}
+                      >
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: 'spring', stiffness: 400 }}
+                        >
+                          {item.icon}
+                        </motion.div>
+                        <span className="flex-1 font-medium text-sm">{item.name}</span>
+                        {item.badge && (
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className={`
+                              px-2 py-0.5 text-xs font-semibold rounded-full
+                              ${isActive(item.href)
+                                ? 'bg-white/20 text-white'
+                                : 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400'
+                              }
+                            `}
+                          >
+                            {item.badge}
+                          </motion.span>
+                        )}
+                      </Link>
+                    )}
                   </motion.div>
                 ))}
               </AnimatePresence>
