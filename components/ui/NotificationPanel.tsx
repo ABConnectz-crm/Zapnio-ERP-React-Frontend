@@ -142,7 +142,7 @@ export function NotificationPanel({ isOpen, onClose, buttonRef }: NotificationPa
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.95 }}
           transition={{ duration: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
-          className="absolute right-0 top-full mt-2 w-96 max-h-[600px] bg-white dark:bg-neutral-900 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden z-50"
+          className="absolute right-0 top-full mt-2 w-96 max-h-[600px] bg-white dark:bg-neutral-900 rounded-lg shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden z-50"
           role="dialog"
           aria-label="Notifications panel"
           aria-modal="true"

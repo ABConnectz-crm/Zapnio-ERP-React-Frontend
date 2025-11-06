@@ -95,7 +95,7 @@ export default function DashboardPage() {
               stiffness: 100,
             }}
             whileHover={{ y: -8, scale: 1.03 }}
-            className="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+            className="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
           >
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-neutral-100/50 dark:to-neutral-800/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -126,20 +126,20 @@ export default function DashboardPage() {
                 <motion.div
                   whileHover={{ scale: 1.15, rotate: 10 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className={`p-3.5 rounded-xl ${getColorClasses(stat.color)} shadow-lg group-hover:shadow-xl transition-shadow`}
+                  className={`p-3.5 rounded-lg ${getColorClasses(stat.color)} shadow-lg group-hover:shadow-xl transition-shadow`}
                 >
                   <stat.icon className="w-6 h-6" />
                 </motion.div>
               </div>
 
               {/* Trend with gradient background */}
-              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-700">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-gradient-to-r from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-700">
                 {stat.trend === 'up' ? (
-                  <div className="p-1 rounded-md bg-green-100 dark:bg-green-900/30">
+                  <div className="p-1 rounded bg-green-100 dark:bg-green-900/30">
                     <ArrowUpRight className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
                   </div>
                 ) : (
-                  <div className="p-1 rounded-md bg-red-100 dark:bg-red-900/30">
+                  <div className="p-1 rounded bg-red-100 dark:bg-red-900/30">
                     <ArrowDownRight className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
                   </div>
                 )}
@@ -163,7 +163,7 @@ export default function DashboardPage() {
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.6, type: 'spring', stiffness: 80 }}
           whileHover={{ y: -4 }}
-          className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
+          className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
         >
           {/* Decorative gradient */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary-500/10 to-accent-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -178,13 +178,13 @@ export default function DashboardPage() {
                   Last 12 months performance
                 </p>
               </div>
-              <select className="px-4 py-2 bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all hover:border-primary-300 dark:hover:border-primary-700">
+              <select className="px-4 py-2 bg-white dark:bg-neutral-800 border-2 border-neutral-200 dark:border-neutral-700 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all hover:border-primary-300 dark:hover:border-primary-700">
                 <option>Last 12 Months</option>
                 <option>Last 6 Months</option>
                 <option>Last 3 Months</option>
               </select>
             </div>
-            <div className="h-72 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-xl flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-neutral-700">
+            <div className="h-72 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-lg flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-neutral-700">
               <div className="text-center">
                 <TrendingUp className="w-12 h-12 text-neutral-300 dark:text-neutral-600 mx-auto mb-2" />
                 <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">Chart visualization</p>
@@ -199,7 +199,7 @@ export default function DashboardPage() {
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.6, type: 'spring', stiffness: 80 }}
           whileHover={{ y: -4 }}
-          className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
+          className="group relative bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-6"
         >
           {/* Decorative gradient */}
           <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-accent-500/10 to-primary-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -208,7 +208,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-extrabold text-neutral-900 dark:text-neutral-100 mb-6">
               Lead Status Distribution
             </h3>
-            <div className="h-72 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-xl flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-neutral-700">
+            <div className="h-72 bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-lg flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-neutral-700">
               <div className="text-center">
                 <Target className="w-12 h-12 text-neutral-300 dark:text-neutral-600 mx-auto mb-2" />
                 <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">Donut chart visualization</p>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
             <motion.button
               whileHover={{ scale: 1.05, x: 2 }}
               whileTap={{ scale: 0.95 }}
-              className="text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors px-3 py-1.5 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
+              className="text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors px-3 py-1.5 rounded-md hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
             >
               View All →
             </motion.button>
@@ -250,7 +250,7 @@ export default function DashboardPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8 + index * 0.05, type: 'spring', stiffness: 100 }}
                 whileHover={{ x: 4, scale: 1.01 }}
-                className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-white to-neutral-50/50 dark:from-neutral-800 dark:to-neutral-700/50 hover:from-primary-50 hover:to-accent-50 dark:hover:from-primary-900/10 dark:hover:to-accent-900/10 border border-neutral-200 dark:border-neutral-700 hover:border-primary-200 dark:hover:border-primary-800 transition-all duration-200 cursor-pointer group/item"
+                className="flex items-start gap-4 p-4 rounded-lg bg-gradient-to-r from-white to-neutral-50/50 dark:from-neutral-800 dark:to-neutral-700/50 hover:from-primary-50 hover:to-accent-50 dark:hover:from-primary-900/10 dark:hover:to-accent-900/10 border border-neutral-200 dark:border-neutral-700 hover:border-primary-200 dark:hover:border-primary-800 transition-all duration-200 cursor-pointer group/item"
               >
                 <div className={`flex-shrink-0 w-2.5 h-2.5 rounded-full mt-2 shadow-lg ${activity.type === 'success' ? 'bg-gradient-to-br from-green-400 to-green-600' : 'bg-gradient-to-br from-primary-400 to-primary-600'}`}>
                   <div className={`w-full h-full rounded-full animate-ping opacity-75 ${activity.type === 'success' ? 'bg-green-400' : 'bg-primary-400'}`} style={{ animationDuration: '3s' }} />
@@ -263,7 +263,7 @@ export default function DashboardPage() {
                     {activity.user}
                   </p>
                 </div>
-                <span className="text-xs text-neutral-500 dark:text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded-lg whitespace-nowrap">
+                <span className="text-xs text-neutral-500 dark:text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded-md whitespace-nowrap">
                   {activity.time}
                 </span>
               </motion.div>

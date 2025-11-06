@@ -86,7 +86,7 @@ export function QuickActions() {
                 exit={{ opacity: 0, x: 20, y: 20 }}
                 transition={{ delay: index * 0.05, duration: 0.2 }}
                 onClick={() => handleAction(action.href)}
-                className="group flex items-center gap-3 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg hover:shadow-xl transition-all focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-950 pl-3 pr-4 py-3"
+                className="group flex items-center gap-3 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-lg hover:shadow-xl transition-all focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-950 pl-3 pr-4 py-3"
                 whileHover={{ scale: 1.05, x: -8 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={action.label}

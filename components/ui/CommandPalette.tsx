@@ -243,7 +243,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
-              className="w-full max-w-2xl bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden"
+              className="w-full max-w-2xl bg-white dark:bg-neutral-900 rounded-lg shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden"
               role="dialog"
               aria-label="Command palette"
               aria-modal="true"

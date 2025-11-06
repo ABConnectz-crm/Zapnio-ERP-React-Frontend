@@ -119,14 +119,14 @@ export function UserProfileDropdown({ isOpen, onClose, buttonRef }: UserProfileD
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.95 }}
           transition={{ duration: 0.15, ease: [0.4, 0.0, 0.2, 1] }}
-          className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-neutral-900 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden z-50"
+          className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-neutral-900 rounded-lg shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden z-50"
           role="menu"
           aria-label="User profile menu"
         >
           {/* User Info Header */}
           <div className="p-4 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 border-b border-neutral-200 dark:border-neutral-800">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-4 ring-white dark:ring-neutral-900">
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-4 ring-white dark:ring-neutral-900">
                 DK
               </div>
               <div className="flex-1 min-w-0">
