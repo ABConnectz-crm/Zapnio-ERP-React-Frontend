@@ -39,7 +39,7 @@ export function GradientCard({
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ duration: 0.2 }}
       className={clsx(
-        'relative overflow-hidden rounded-xl bg-gradient-to-br shadow-lg hover:shadow-xl transition-shadow',
+        'relative overflow-hidden rounded-lg bg-gradient-to-br shadow-lg hover:shadow-xl transition-shadow',
         gradients[gradient],
         className
       )}

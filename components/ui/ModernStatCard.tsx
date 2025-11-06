@@ -39,7 +39,7 @@ export function ModernStatCard({
     <motion.div
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ duration: 0.2 }}
-      className="relative bg-gradient-to-br from-white via-white to-lavender-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 rounded-xl p-6 shadow-soft hover:shadow-elegant border border-neutral-100 dark:border-neutral-800"
+      className="relative bg-gradient-to-br from-white via-white to-lavender-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 rounded-lg p-6 shadow-soft hover:shadow-elegant border border-neutral-100 dark:border-neutral-800"
     >
       {/* Icon Badge */}
       <div className="flex items-start justify-between mb-4">
@@ -51,7 +51,7 @@ export function ModernStatCard({
             {value}
           </h3>
         </div>
-        <div className={`p-3 rounded-xl ${iconColorClasses[iconColor]} shadow-sm`}>
+        <div className={`p-3 rounded-lg ${iconColorClasses[iconColor]} shadow-sm`}>
           {icon}
         </div>
       </div>

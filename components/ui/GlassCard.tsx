@@ -33,7 +33,7 @@ export function GlassCard({
     <Component
       {...motionProps}
       className={clsx(
-        'glass-card rounded-xl border border-neutral-200/50 dark:border-neutral-700/50',
+        'glass-card rounded-lg border border-neutral-200/50 dark:border-neutral-700/50',
         'bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl',
         'shadow-lg hover:shadow-xl transition-all duration-300',
         paddingClasses[padding],

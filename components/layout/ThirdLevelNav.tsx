@@ -51,7 +51,7 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative px-4 py-2 rounded-lg group"
+                    className="relative px-4 py-2 rounded-md group"
                   >
                     <span
                       className={`relative z-10 text-sm font-medium transition-colors ${
@@ -65,7 +65,7 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
                     {active && (
                       <motion.div
                         layoutId="thirdLevelActiveTab"
-                        className="absolute inset-0 bg-primary-100 dark:bg-primary-900/30 rounded-lg"
+                        className="absolute inset-0 bg-primary-100 dark:bg-primary-900/30 rounded-md"
                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       />
                     )}
@@ -86,7 +86,7 @@ export function ThirdLevelNav({ title, tabs = [], actions = [] }: ThirdLevelNavP
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.98 }}
               onClick={action.onClick}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 ${
                 action.variant === 'primary'
                   ? 'bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white focus:ring-primary-500'
                   : 'bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 focus:ring-primary-500'
