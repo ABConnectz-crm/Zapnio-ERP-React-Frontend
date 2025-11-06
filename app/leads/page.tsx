@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ModernLayout } from '@/components/layout/ModernLayout';
-import { ContentTopBar } from '@/components/layout/ContentTopBar';
+import { ThirdLevelNav } from '@/components/layout/ThirdLevelNav';
 import { motion } from 'framer-motion';
 import { Plus, Upload, Download, Search } from 'lucide-react';
 
@@ -35,36 +35,38 @@ export default function LeadsPage() {
   };
 
   return (
-    <ModernLayout>
-      {/* Content Top Bar with Actions */}
-      <ContentTopBar
-        title="Leads"
-        tabs={[
-          { id: 'all', name: 'All Leads', href: '/leads' },
-          { id: 'my-leads', name: 'My Leads', href: '/leads/my-leads' },
-          { id: 'unassigned', name: 'Unassigned', href: '/leads/unassigned' },
-        ]}
-        actions={[
-          {
-            id: 'import',
-            label: 'Import',
-            icon: <Upload className="w-4 h-4" />,
-            variant: 'secondary',
-          },
-          {
-            id: 'export',
-            label: 'Export',
-            icon: <Download className="w-4 h-4" />,
-            variant: 'secondary',
-          },
-          {
-            id: 'new',
-            label: 'New Lead',
-            icon: <Plus className="w-4 h-4" />,
-            variant: 'primary',
-          },
-        ]}
-      />
+    <ModernLayout
+      thirdLevelNav={
+        <ThirdLevelNav
+          title="Leads"
+          tabs={[
+            { id: 'all', name: 'All Leads', href: '/leads' },
+            { id: 'my-leads', name: 'My Leads', href: '/leads/my-leads' },
+            { id: 'unassigned', name: 'Unassigned', href: '/leads/unassigned' },
+          ]}
+          actions={[
+            {
+              id: 'import',
+              label: 'Import',
+              icon: <Upload className="w-4 h-4" />,
+              variant: 'secondary',
+            },
+            {
+              id: 'export',
+              label: 'Export',
+              icon: <Download className="w-4 h-4" />,
+              variant: 'secondary',
+            },
+            {
+              id: 'new',
+              label: 'New Lead',
+              icon: <Plus className="w-4 h-4" />,
+              variant: 'primary',
+            },
+          ]}
+        />
+      }
+    >
 
       {/* Filters and Search */}
       <motion.div
